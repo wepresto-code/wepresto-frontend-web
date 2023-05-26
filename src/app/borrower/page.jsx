@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Flex, Text, createStandaloneToast } from "@chakra-ui/react";
+import { Flex, Text, Spinner, createStandaloneToast } from "@chakra-ui/react";
 
 import useAuthContext from "@wepresto/context/auth-context";
 
@@ -107,7 +107,9 @@ export default function Borrower() {
       >
         <Greetings user={user} value={greetingsCase} />
 
-        {loading && !disbursedLoans.length && (
+        {loading && <Spinner mt={4} />}
+
+        {!loading && !disbursedLoans.length && (
           <Flex flexDir={"column"}>
             <Text mt={8}>
               No tienes préstamos desembolsados por el momento. Solicita uno:
