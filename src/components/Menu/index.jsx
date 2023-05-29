@@ -15,14 +15,13 @@ import {
 import { Link } from "@chakra-ui/next-js";
 import { usePathname } from "next/navigation";
 import React, { useState, useEffect } from "react";
-import {
-  FaCog,
-  FaSignOutAlt,
-  FaChevronRight,
-} from "react-icons/fa";
-import BottomNav from "./BottomNav";
+import { FaCog, FaSignOutAlt, FaChevronRight } from "react-icons/fa";
+
 import signOut from "@wepresto/firebase/sign-out";
+
 import getUserFirstAndLastName from "@wepresto/utils/get-user-first-and-last-name";
+
+import BottomNav from "./BottomNav";
 
 export const Menu = ({ user = undefined, menuItems = [] }) => {
   const pathname = usePathname();
@@ -31,12 +30,16 @@ export const Menu = ({ user = undefined, menuItems = [] }) => {
   const [avatarSize, setAvatarSize] = useState("100px");
   const [avatarFontSize, setAvatarFontSize] = useState("50px");
   const [opacity, setOpacity] = useState(0);
+  const [profileLink, setProfileLink] = useState("/");
 
   const handleScroll = () => {
     setScrollY(window.scrollY);
   };
 
   useEffect(() => {
+    if (user.borrower) setProfileLink("/borrower/profile");
+    else if (user.lender) setProfileLink("/lender/profile");
+
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -167,7 +170,11 @@ export const Menu = ({ user = undefined, menuItems = [] }) => {
           <Link href={"/home"}>
             <Image alt="Logo de WePresto" src="/logo.png" width={150} mb={6} />
           </Link>
-          <Avatar size="xl" name={getUserFirstAndLastName(user?.fullName)} src={getUserFirstAndLastName(user?.fullName)} />
+          <Avatar
+            size="xl"
+            name={getUserFirstAndLastName(user?.fullName)}
+            src={getUserFirstAndLastName(user?.fullName)}
+          />
           <Text color="brand.font" mt={4} fontSize={20} fontWeight={600}>
             {user.fullName}
           </Text>
@@ -226,7 +233,7 @@ export const Menu = ({ user = undefined, menuItems = [] }) => {
         listStyleType="none"
       >
         <Link
-          href={"/home/profile"}
+          href={profileLink}
           w="100%"
           textDecoration="none"
           _hover={{
