@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import environment from "@wepresto/environment";
+
 import getIdTokenFromCurrentUser from "@wepresto/utils/get-id-token-from-current-user";
 
 class UserService {
@@ -7,7 +9,7 @@ class UserService {
     const token = await getIdTokenFromCurrentUser();
 
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/users/${uid}`,
+      `${environment.API_URL}/users/${uid}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -30,7 +32,7 @@ class UserService {
     password,
   }) {
     const { data } = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/users/borrower`,
+      `${environment.API_URL}/users/borrower`,
       {
         documentType,
         documentNumber,
@@ -62,7 +64,7 @@ class UserService {
     password,
   }) {
     const { data } = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/users/lender`,
+      `${environment.API_URL}/users/lender`,
       {
         documentType,
         documentNumber,
@@ -84,7 +86,7 @@ class UserService {
 
   async sendResetPasswordEmail({ email }) {
     const { data } = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/users/reset-password-email`,
+      `${environment.API_URL}/users/reset-password-email`,
       {
         email,
       },

@@ -1,13 +1,15 @@
 import axios from "axios";
 
+import environment from "@wepresto/environment";
+
 import getIdTokenFromCurrentUser from "@wepresto/utils/get-id-token-from-current-user";
 
 class MovementService {
-  async getLoanInstallmentInfo ({ movementUid }) {
+  async getLoanInstallmentInfo({ movementUid }) {
     const token = await getIdTokenFromCurrentUser();
 
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/movements/loan-installment-info`,
+      `${environment.API_URL}/movements/loan-installment-info`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -19,6 +21,27 @@ class MovementService {
     );
 
     return data;
+  }
+
+  async getLoanMovements({ loanUid }) {
+    const token = await getIdTokenFromCurrentUser();
+
+    const { data } = await axios.get(
+      `${environment.API_URL}/movements/loan-movements`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          loanUid,
+          take: 1000,
+        },
+      },
+    );
+
+    const { movements } = data;
+
+    return movements;
   }
 }
 

@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 import { Flex, Text, Spinner, createStandaloneToast } from "@chakra-ui/react";
 
+import environment from "@wepresto/environment";
+
 import useAuthContext from "@wepresto/context/auth-context";
 
 import loanService from "@wepresto/services/loan.service";
@@ -17,9 +19,8 @@ import LoanPaymentInformationCard from "./_components/LoanPaymentInformationCard
 
 const { toast } = createStandaloneToast();
 
-const DISBURSED_LOAN_STATUS = process.env.NEXT_PUBLIC_DISBURSED_LOAN_STATUS;
-const LOAN_INSTALLMENT_MOVEMENT_TYPE =
-  process.env.NEXT_PUBLIC_LOAN_INSTALLMENT_MOVEMENT_TYPE;
+const DISBURSED_LOAN_STATUS = environment.DISBURSED_LOAN_STATUS;
+const LOAN_INSTALLMENT_MOVEMENT_TYPE = environment.LOAN_INSTALLMENT_MOVEMENT_TYPE;
 
 export default function Borrower() {
   const { user } = useAuthContext();
@@ -37,10 +38,11 @@ export default function Borrower() {
 
       let newLoans = [];
       for (const loan of loans) {
-        const [minimalPaymentInformation, totalPaymentInformation] = await Promise.all([
-          loanService.getMinimumPaymentInformation({ loanUid: loan.uid }),
-          loanService.getTotalPaymentInformation({ loanUid: loan.uid }),
-        ]);
+        const [minimalPaymentInformation, totalPaymentInformation] =
+          await Promise.all([
+            loanService.getMinimumPaymentInformation({ loanUid: loan.uid }),
+            loanService.getTotalPaymentInformation({ loanUid: loan.uid }),
+          ]);
 
         const { movements = [] } = minimalPaymentInformation;
 
@@ -112,25 +114,25 @@ export default function Borrower() {
         {!loading && !disbursedLoans.length && (
           <Flex flexDir={"column"}>
             <Text mt={8}>
-              No tienes préstamos desembolsados por el momento. Solicita uno:
+              No tienes préstamos desembolsados por el momento.
             </Text>
           </Flex>
         )}
 
-        {!loading && disbursedLoans.length && (
-          <>
-            {disbursedLoans.map((loan) => (
-              <LoanPaymentInformationCard
-                key={loan.uid}
-                data={{
-                  term: loan.term,
-                  minimalPaymentInformation:  { ...loan.minimalPaymentInformation },
-                  totalPaymentInformation: { ...loan.totalPaymentInformation },
-                }}
-              />
-            ))}
-          </>
-        )}
+        {!loading &&
+          disbursedLoans.length &&
+          disbursedLoans.map((loan) => (
+            <LoanPaymentInformationCard
+              key={loan.uid}
+              data={{
+                term: loan.term,
+                minimalPaymentInformation: {
+                  ...loan.minimalPaymentInformation,
+                },
+                totalPaymentInformation: { ...loan.totalPaymentInformation },
+              }}
+            />
+          ))}
       </Flex>
     </>
   );

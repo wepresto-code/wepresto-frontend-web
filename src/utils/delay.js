@@ -1,5 +1,7 @@
+ import environment from "@wepresto/environment";
+
  const delay = (ms) => {
-  const timeToWait = ms || parseInt(process.env.NEXT_PUBLIC_DELAY_TIME, 10);
+  const timeToWait = ms || parseInt(environment.DELAY_TIME, 10);
 
   return new Promise((resolve) => {
     setTimeout(resolve, timeToWait);
