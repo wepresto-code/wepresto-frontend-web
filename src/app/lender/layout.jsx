@@ -5,7 +5,7 @@ import { Flex, Container } from "@chakra-ui/react";
 import {
   FaChartPie,
   FaChartLine,
-  FaMoneyBillWave,
+  FaSearchDollar,
 } from "react-icons/fa";
 
 import { Providers } from "../providers";
@@ -20,20 +20,20 @@ const LenderMenuItems = [
     name: "Dashboard",
     icon: <FaChartPie fontSize={22} style={{ marginRight: "8px" }} />,
     iconMobile: <FaChartPie fontSize={22} />,
-    link: "/home",
+    link: "/lender",
   },
   {
     name: "Mis Inversiones",
     mobileName: "Inversiones",
     icon: <FaChartLine fontSize={22} style={{ marginRight: "8px" }} />,
     iconMobile: <FaChartLine fontSize={22} />,
-    link: "/home/investments",
+    link: "/lender/investments",
   },
  {
-    name: "Retirar",
-    icon: <FaMoneyBillWave fontSize={22} style={{ marginRight: "8px" }} />,
-    iconMobile: <FaMoneyBillWave fontSize={22} />,
-    link: "/home/withdraw",
+    name: "Oportunidades",
+    icon: <FaSearchDollar fontSize={22} style={{ marginRight: "8px" }} />,
+    iconMobile: <FaSearchDollar fontSize={22} />,
+    link: "/lender/opportunities",
   },
 ];
 
