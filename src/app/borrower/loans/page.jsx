@@ -24,7 +24,7 @@ import LoanInformationCard from "./_components/LoanInformationCard";
 
 const { toast } = createStandaloneToast();
 
-export default function Loans() {
+export default function LoansPage() {
   const router = useRouter();
   const { user } = useAuthContext();
 

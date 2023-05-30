@@ -23,17 +23,17 @@ const LenderMenuItems = [
     link: "/lender",
   },
   {
+    name: "Oportunidades",
+    icon: <FaSearchDollar fontSize={22} style={{ marginRight: "8px" }} />,
+    iconMobile: <FaSearchDollar fontSize={22} />,
+    link: "/lender/opportunities",
+  },
+  {
     name: "Mis Inversiones",
     mobileName: "Inversiones",
     icon: <FaChartLine fontSize={22} style={{ marginRight: "8px" }} />,
     iconMobile: <FaChartLine fontSize={22} />,
     link: "/lender/investments",
-  },
- {
-    name: "Oportunidades",
-    icon: <FaSearchDollar fontSize={22} style={{ marginRight: "8px" }} />,
-    iconMobile: <FaSearchDollar fontSize={22} />,
-    link: "/lender/opportunities",
   },
 ];
 

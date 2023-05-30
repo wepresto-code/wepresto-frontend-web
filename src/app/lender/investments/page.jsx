@@ -17,6 +17,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { AiOutlineInfoCircle } from "react-icons/ai";
+import { useRouter } from "next/navigation";
 
 import lenderService from "@wepresto/services/lender.service";
 
@@ -50,6 +51,7 @@ const getRows = (items) => {
 export default function InvestmentsPage() {
   const { user } = useAuthContext();
   const { toast } = createStandaloneToast();
+  const router = useRouter();
 
   const [loading, setLoading] = useState(true);
   const [participations, setParticipations] = useState([]);
@@ -80,7 +82,6 @@ export default function InvestmentsPage() {
   return (
     <>
       <ValidateUser type={"lender"} />
-
       <Flex
         mt={[32, 32, 40]}
         pb={[10, 10, 4]}
@@ -93,16 +94,18 @@ export default function InvestmentsPage() {
 
         {loading && <Spinner mt={4} />}
 
-        <Flex flexDirection="column" mt={6}>
-          <Button
-            id="apply-for-loan-button"
-            colorScheme="primary"
-            maxW={"fit-content"}
-            // onClick={() => router.push("/borrower/loans/application")}
-          >
-            Invertir
-          </Button>
-        </Flex>
+        {!loading && (
+          <Flex flexDirection="column" mt={6}>
+            <Button
+              id="apply-for-loan-button"
+              colorScheme="primary"
+              maxW={"fit-content"}
+              onClick={() => router.push("/lender/opportunities")}
+            >
+              Invertir
+            </Button>
+          </Flex>
+        )}
 
         {!loading && participations.length && (
           <Flex overflowX="auto">
@@ -142,10 +145,7 @@ export default function InvestmentsPage() {
                       </Flex>
                     </Th>
                   </Tooltip>
-                  <Th
-                    color="primary.600"
-                    textAlign="right"
-                  >
+                  <Th color="primary.600" textAlign="right">
                     Cuotas
                   </Th>
                   <Tooltip
@@ -178,7 +178,12 @@ export default function InvestmentsPage() {
                     label="Dinero que posiblemente generes con el interés de este préstamo"
                     placement="auto"
                   >
-                    <Th color="primary.600" cursor="help" textAlign="right" borderRightRadius={12}>
+                    <Th
+                      color="primary.600"
+                      cursor="help"
+                      textAlign="right"
+                      borderRightRadius={12}
+                    >
                       <Flex flexDir="row" alignItems="center">
                         Ganancias esperadas{" "}
                         <Box display={["none", "none", "flex"]}>
@@ -213,7 +218,7 @@ export default function InvestmentsPage() {
                     <Td color="brand.font" textAlign="center">
                       {participation.paidInterest}
                     </Td>
-                    <Td color="brand.font" textAlign="center">
+                    <Td color="brand.font" textAlign="center" borderRightRadius={12}>
                       {participation.interest}
                     </Td>
                   </Tr>
