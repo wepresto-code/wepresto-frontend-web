@@ -144,7 +144,6 @@ export default function InvestmentsPage() {
                   </Tooltip>
                   <Th
                     color="primary.600"
-                    borderRightRadius={12}
                     textAlign="right"
                   >
                     Cuotas
@@ -179,7 +178,7 @@ export default function InvestmentsPage() {
                     label="Dinero que posiblemente generes con el interés de este préstamo"
                     placement="auto"
                   >
-                    <Th color="primary.600" cursor="help" textAlign="right">
+                    <Th color="primary.600" cursor="help" textAlign="right" borderRightRadius={12}>
                       <Flex flexDir="row" alignItems="center">
                         Ganancias esperadas{" "}
                         <Box display={["none", "none", "flex"]}>
