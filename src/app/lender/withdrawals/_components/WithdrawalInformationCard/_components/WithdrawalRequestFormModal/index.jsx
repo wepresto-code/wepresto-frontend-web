@@ -25,8 +25,7 @@ import { useForm } from "react-hook-form";
 import formatCurrency from "@wepresto/utils/format-currency";
 
 const signInSchema = Yup.object().shape({
-  amount: Yup.number()
-    .required("Este campo es requerido"),
+  amount: Yup.number().required("Este campo es requerido"),
   bank: Yup.string().required("Este campo es requerido"),
   accountType: Yup.string().required("Este campo es requerido"),
   accountNumber: Yup.string().required("Este campo es requerido"),
@@ -39,7 +38,7 @@ export default function WithdrawalRequestFormModal({
   onClose,
   availableToWithdraw,
 }) {
-  const { register, handleSubmit, formState } = useForm(formOptions);
+  const { register, formState } = useForm(formOptions);
   const { errors, isSubmitting } = formState;
 
   return (
@@ -58,6 +57,10 @@ export default function WithdrawalRequestFormModal({
             as="form"
             // onSubmit={handleSubmit(onSubmit)}
           >
+            <Text mb={4}>
+              Disponible para retirar:{" "}
+              {formatCurrency(availableToWithdraw, "COP")}
+            </Text>
             <Stack spacing={4}>
               <FormControl isInvalid={errors?.amount ? true : false} isRequired>
                 <FormLabel>Monto</FormLabel>

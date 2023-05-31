@@ -18,7 +18,7 @@ import environment from "@wepresto/environment";
 
 import formatCurrency from "@wepresto/utils/format-currency";
 
-import HowToPayModal from "./_components/WithdrawalRequestFormModal";
+import WithdrawalRequestFormModal from "./_components/WithdrawalRequestFormModal";
 
 export default function WithdrawalInformationCard({ data }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -98,11 +98,10 @@ export default function WithdrawalInformationCard({ data }) {
           </Button>
         </Flex>
       </Flex>
-      <HowToPayModal
+      <WithdrawalRequestFormModal
         isOpen={isOpen}
         onClose={onClose}
-        minimumPaymentAmount={data?.totalWithdrawn}
-        maximumPaymentAmount={data?.availableToWithdraw}
+        availableToWithdraw={data?.availableToWithdraw}
       />
     </>
   );
