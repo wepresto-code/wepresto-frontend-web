@@ -107,7 +107,7 @@ export default function InvestmentsPage() {
           </Flex>
         )}
 
-        {!loading && participations.length && (
+        {!loading && participations.length > 0 && (
           <Flex overflowX="auto">
             <Table
               style={{ borderCollapse: "separate", borderSpacing: "0 12px" }}

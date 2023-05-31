@@ -96,6 +96,7 @@ export default function LoanParticipationsResumeCard({ data }) {
           colorScheme="primary"
           maxW={"fit-content"}
           onClick={() => router.push("/lender/withdrawals")}
+          isDisabled={data?.totalInvested <= 0}
         >
           Retirar
           <FaArrowRight style={{ marginLeft: "8px" }} />

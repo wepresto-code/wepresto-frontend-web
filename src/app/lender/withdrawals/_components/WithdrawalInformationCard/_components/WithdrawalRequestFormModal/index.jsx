@@ -24,6 +24,16 @@ import { useForm } from "react-hook-form";
 
 import formatCurrency from "@wepresto/utils/format-currency";
 
+const signInSchema = Yup.object().shape({
+  amount: Yup.number()
+    .required("Este campo es requerido"),
+  bank: Yup.string().required("Este campo es requerido"),
+  accountType: Yup.string().required("Este campo es requerido"),
+  accountNumber: Yup.string().required("Este campo es requerido"),
+});
+
+const formOptions = { resolver: yupResolver(signInSchema) };
+
 export default function WithdrawalRequestFormModal({
   isOpen,
   onClose,
@@ -31,17 +41,6 @@ export default function WithdrawalRequestFormModal({
 }) {
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors, isSubmitting } = formState;
-
-  const signInSchema = Yup.object().shape({
-    amount: Yup.number()
-      .required("Este campo es requerido")
-      .max(availableToWithdraw),
-    bank: Yup.string().required("Este campo es requerido"),
-    accountType: Yup.string().required("Este campo es requerido"),
-    accountNumber: Yup.string().required("Este campo es requerido"),
-  });
-
-  const formOptions = { resolver: yupResolver(signInSchema) };
 
   return (
     <Modal isCentered isOpen={isOpen} onClose={onClose} size="lg">
