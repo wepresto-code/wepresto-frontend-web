@@ -7,6 +7,7 @@ import {
   FaChartLine,
   FaSearchDollar,
 } from "react-icons/fa";
+import { BiMoneyWithdraw } from "react-icons/bi";
 
 import { Providers } from "../providers";
 
@@ -29,12 +30,17 @@ const LenderMenuItems = [
     link: "/lender/opportunities",
   },
   {
-    name: "Mis Inversiones",
-    mobileName: "Inversiones",
+    name: "Inversiones",
     icon: <FaChartLine fontSize={22} style={{ marginRight: "8px" }} />,
     iconMobile: <FaChartLine fontSize={22} />,
     link: "/lender/investments",
   },
+  {
+    name: "Retiros",
+    icon: <BiMoneyWithdraw fontSize={22} style={{ marginRight: "8px" }} />,
+    iconMobile: <BiMoneyWithdraw fontSize={22} />,
+    link: "/lender/withdrawals",
+  }
 ];
 
 export default function BorrowerLayaout({ children }) {

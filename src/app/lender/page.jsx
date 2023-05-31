@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import { Flex, Spinner, createStandaloneToast } from "@chakra-ui/react";
 
 import lenderService from "@wepresto/services/lender.service";
-import withdrawalService from "@wepresto/services/withdrawal.service";
 
 import useAuthContext from "@wepresto/context/auth-context";
 
@@ -28,13 +27,9 @@ export default function Borrower() {
       const result = await lenderService.getParticipationsResume({
         lenderUid: getLenderUid(user),
       });
-      const result1 = await withdrawalService.getTotalWithdrawn({
-        lenderUid: getLenderUid(user),
-      });
 
       setParticipationsResume({
         ...result,
-        ...result1,
       });
     } catch (error) {
       toast({

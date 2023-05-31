@@ -22,6 +22,24 @@ class WithdrawalService {
 
     return data;
   }
+
+  async getAvailableToWithdraw({ lenderUid }) {
+    const token = await getIdTokenFromCurrentUser();
+
+    const { data } = await axios.get(
+      `${environment.API_URL}/withdrawals/available-to-withdraw`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          lenderUid,
+        },
+      }
+    );
+
+    return data;
+  }
 }
 
 export default new WithdrawalService();

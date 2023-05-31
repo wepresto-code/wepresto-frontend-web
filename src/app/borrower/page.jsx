@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Flex, Text, Spinner, createStandaloneToast } from "@chakra-ui/react";
+import { Flex, Text, Spinner, createStandaloneToast, Button } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 
 import environment from "@wepresto/environment";
 
@@ -24,6 +25,7 @@ const LOAN_INSTALLMENT_MOVEMENT_TYPE = environment.LOAN_INSTALLMENT_MOVEMENT_TYP
 
 export default function Borrower() {
   const { user } = useAuthContext();
+  const router = useRouter();
 
   const [loading, setLoading] = useState(true);
   const [greetingsCase, setGreetingsCase] = useState();
@@ -111,16 +113,28 @@ export default function Borrower() {
 
         {loading && <Spinner mt={4} />}
 
-        {!loading && !disbursedLoans.length && (
+        {!loading && !disbursedLoans.length > 0 && (
+          <>
           <Flex flexDir={"column"}>
             <Text mt={8}>
               No tienes préstamos desembolsados por el momento.
-            </Text>
+            </Text>            
           </Flex>
+          <Flex flexDirection="column" mt={6}>
+            <Button
+              id="go-to-loans-button"
+              colorScheme="primary"
+              maxW={"fit-content"}
+              onClick={() => router.push("/borrower/loans")}
+            >
+              Ir a mis préstamos
+            </Button>
+          </Flex>
+          </>
         )}
 
         {!loading &&
-          disbursedLoans.length &&
+          disbursedLoans.length > 0 &&
           disbursedLoans.map((loan) => (
             <LoanPaymentInformationCard
               key={loan.uid}

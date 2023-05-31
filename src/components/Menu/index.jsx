@@ -82,7 +82,7 @@ export const Menu = ({ user = undefined, menuItems = [] }) => {
         position="fixed"
         zIndex={3}
         display="flex"
-        href="/home/profile"
+        href={profileLink}
       >
         <Avatar
           border={"3px white solid"}
@@ -125,7 +125,7 @@ export const Menu = ({ user = undefined, menuItems = [] }) => {
   ) : (
     <Flex
       minW="320px"
-      height="86dvh"
+      height={menuItems.length > 2 ? "auto" : "85vh"}
       display={["none", "flex"]}
       borderRadius={22}
       m={10}

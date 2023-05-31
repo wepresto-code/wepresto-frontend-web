@@ -68,22 +68,13 @@ export default function LoansPage() {
         </Heading>
         {loading && <Spinner mt={4} />}
 
-        {!loading && loans.length && (
+        {!loading && (
           <Flex flexDirection="column" mt={6}>
             <Button
               id="apply-for-loan-button"
-              bgColor="gray.700"
-              color="white"
+              colorScheme="primary"
               maxW={"fit-content"}
-              _hover={{
-                bg: "gray.500",
-                textDecoration: "none",
-              }}
-              _focusVisible={{
-                bg: "gray.500",
-                textDecoration: "none",
-              }}
-              disabled={loans?.some((loan) => loan.status === environment.APPLIED_LOAN_STATUS)}
+              isDisabled={loans?.some((loan) => loan.status === environment.APPLIED_LOAN_STATUS)}
               onClick={() => router.push("/borrower/loans/application")}
             >
               Solicitar nuevo préstamo
@@ -92,7 +83,7 @@ export default function LoansPage() {
         )}
 
         {!loading &&
-          loans.length &&
+          loans.length > 0 &&
           loans.map((loan) => (
             <LoanInformationCard key={loan.uid} data={loan} />
           ))}

@@ -85,24 +85,6 @@ export default function LoanParticipationsResumeCard({ data }) {
                   {formatCurrency(data?.totalInterest)}
                 </Text>
               </Box>
-              <Box mr={[0, 0, 8]} flexBasis={["50%", "unset"]}>
-                <Text
-                  fontSize={18}
-                  my={[1, 1, 2]}
-                  fontWeight="400"
-                  color="primary.700"
-                >
-                  Retirado
-                </Text>
-                <Text fontSize={16} fontWeight="600" color="primary.900">
-                  {formatCurrency(
-                    data?.totalWithdrawn
-                      ? data?.totalWithdrawn * -1
-                      : data?.totalWithdrawn,
-                    "COP"
-                  )}
-                </Text>
-              </Box>
             </Flex>
           </AccordionPanel>
         </AccordionItem>
