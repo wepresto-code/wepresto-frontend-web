@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Flex,
   Text,
@@ -21,7 +21,13 @@ import formatCurrency from "@wepresto/utils/format-currency";
 import WithdrawalRequestFormModal from "./_components/WithdrawalRequestFormModal";
 
 export default function WithdrawalInformationCard({ data }) {
+  const [availableToWithdraw, setAvailableToWithdraw] = useState(0);
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  useEffect(() => {
+    setAvailableToWithdraw(data?.availableToWithdraw);
+  }, [data]);
+
 
   return (
     <>
@@ -47,7 +53,7 @@ export default function WithdrawalInformationCard({ data }) {
             >
               <Flex alignItems={"baseline"}>
                 <Text fontSize={[34, 50]} color="brand.font">
-                  {formatCurrency(data?.availableToWithdraw, "COP")}
+                  {formatCurrency(availableToWithdraw, "COP")}
                 </Text>
               </Flex>
               <AccordionIcon w={8} h={8} />
@@ -102,6 +108,7 @@ export default function WithdrawalInformationCard({ data }) {
         isOpen={isOpen}
         onClose={onClose}
         availableToWithdraw={data?.availableToWithdraw}
+        setAvailableToWithdraw={setAvailableToWithdraw}
       />
     </>
   );

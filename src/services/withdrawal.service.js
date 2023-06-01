@@ -40,6 +40,31 @@ class WithdrawalService {
 
     return data;
   }
+
+  async requestWithdrawal({ lenderUid, amount, bank, accountType, accountNumber }) {
+    const token = await getIdTokenFromCurrentUser();
+
+    const { data } = await axios.post(
+      `${environment.API_URL}/withdrawals/withdrawal-request`,
+      {
+        lenderUid,
+        amount,
+        bank,
+        accountType,
+        accountNumber,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return {
+      ...data,
+      message: "Tu solicitud de retiro ha sido enviada."
+    };
+  }
 }
 
 export default new WithdrawalService();
