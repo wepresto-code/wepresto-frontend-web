@@ -51,7 +51,7 @@ const images = [
   },
 ];
 
-export default function Home() {
+export default function LandingPage() {
   const router = useRouter();
 
   const [slogan, setSlogan] = React.useState(slogans[0]);
