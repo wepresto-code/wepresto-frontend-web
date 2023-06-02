@@ -1,14 +1,19 @@
 "use client";
 
 import React from "react";
-import { Flex, Heading, FormLabel, Input } from "@chakra-ui/react";
+import { Flex, Heading, FormLabel, Input, Button, useBreakpointValue } from "@chakra-ui/react";
+import { FaSignOutAlt } from "react-icons/fa";
+
+import signOut from "@wepresto/firebase/sign-out";
 
 import useAuthContext from "@wepresto/context/auth-context";
 
 import ValidateUser from "@wepresto/components/ValidateUser";
 
-export default function profilePage() {
+export default function ProfilePage() {
   const { user } = useAuthContext();
+
+  const isMobile = useBreakpointValue({ base: true, md: false });
 
   return (
     <>
@@ -60,7 +65,7 @@ export default function profilePage() {
           </FormLabel>
           <Input
             disabled
-            value={user.phoneNumber}  
+            value={user.phoneNumber}
             placeholder="Ingresa tu nuevo número telefónico"
             mb={3}
           />
@@ -74,6 +79,20 @@ export default function profilePage() {
             mb={3}
           />
         </Flex>
+        {isMobile && (
+          <Flex flexDirection="column" mt={[4, 4, 8]}>
+            <Button
+              id="apply-for-loan-button"
+              colorScheme="red"
+              onClick={() => signOut()}
+              leftIcon={
+                <FaSignOutAlt fontSize={22} style={{ marginRight: "8px" }} />
+              }
+            >
+              Cerrar sesión
+            </Button>
+          </Flex>
+        )}
       </Flex>
     </>
   );
