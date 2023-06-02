@@ -52,7 +52,7 @@ export default function WithdrawalInformationCard({ data }) {
               justifyContent="space-between"
             >
               <Flex alignItems={"baseline"}>
-                <Text fontSize={[24, 50]} color="brand.font">
+                <Text fontSize={25} color="brand.font">
                   {formatCurrency(availableToWithdraw, "COP")}
                 </Text>
               </Flex>

@@ -42,7 +42,7 @@ export default function LoanParticipationsResumeCard({ data }) {
             justifyContent="space-between"
           >
             <Flex alignItems={"baseline"}>
-              <Text fontSize={[24, 50]} color="brand.font">
+              <Text fontSize={25} color="brand.font">
                 {formatCurrency(data?.totalInvested, "COP")}
               </Text>
             </Flex>

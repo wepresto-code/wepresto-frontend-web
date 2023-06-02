@@ -51,7 +51,7 @@ export default function LoanPaymentInformationCard({ data }) {
               justifyContent="space-between"
             >
               <Flex alignItems={"baseline"}>
-                <Text fontSize={[34, 50]} color="brand.font">
+                <Text fontSize={25} color="brand.font">
                   {formatCurrency(
                     minimalPaymentInformation?.totalAmount,
                     "COP"
