@@ -37,8 +37,8 @@ export const Menu = ({ user = undefined, menuItems = [] }) => {
   };
 
   useEffect(() => {
-    if (user.borrower) setProfileLink("/borrower/profile");
-    else if (user.lender) setProfileLink("/lender/profile");
+    if (user?.borrower) setProfileLink("/borrower/profile");
+    else if (user?.lender) setProfileLink("/lender/profile");
 
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -87,8 +87,8 @@ export const Menu = ({ user = undefined, menuItems = [] }) => {
         <Avatar
           border={"3px white solid"}
           size="xl"
-          name={user.fullName}
-          src={user.image}
+          name={user?.fullName}
+          src={user?.image}
           zIndex={3}
           h={avatarSize}
           w={avatarSize}
@@ -176,7 +176,7 @@ export const Menu = ({ user = undefined, menuItems = [] }) => {
             src={getUserFirstAndLastName(user?.fullName)}
           />
           <Text color="brand.font" mt={4} fontSize={20} fontWeight={600}>
-            {user.fullName}
+            {user?.fullName}
           </Text>
         </Flex>
       )}

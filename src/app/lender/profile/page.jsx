@@ -46,7 +46,7 @@ export default function ProfilePage() {
           </FormLabel>
           <Input
             disabled
-            value={user.fullName}
+            value={user?.fullName}
             placeholder="Ingresa tu nuevo nombre"
             mb={6}
           />
@@ -55,7 +55,7 @@ export default function ProfilePage() {
           </FormLabel>
           <Input
             disabled
-            value={user.email}
+            value={user?.email}
             // onChange={handleEmailChange}
             placeholder="Ingresa tu nuevo correo"
             mb={6}
@@ -65,7 +65,7 @@ export default function ProfilePage() {
           </FormLabel>
           <Input
             disabled
-            value={user.phoneNumber}
+            value={user?.phoneNumber}
             placeholder="Ingresa tu nuevo número telefónico"
             mb={3}
           />
@@ -74,7 +74,7 @@ export default function ProfilePage() {
           </FormLabel>
           <Input
             disabled
-            value={user.address}
+            value={user?.address}
             placeholder="Ingresa tu nueva dirección"
             mb={3}
           />
