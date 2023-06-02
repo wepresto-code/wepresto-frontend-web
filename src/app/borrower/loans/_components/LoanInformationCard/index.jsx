@@ -90,7 +90,7 @@ export default function LoanInformationCard({ data }) {
                   flexDir={["column", "column", "row"]}
                 >
                   <Flex alignItems={"baseline"}>
-                    <Text fontSize={[24, 30]} color="brand.font">
+                    <Text fontSize={25} color="brand.font">
                       {formatCurrency(data.amount, "COP")}
                     </Text>
                   </Flex>
