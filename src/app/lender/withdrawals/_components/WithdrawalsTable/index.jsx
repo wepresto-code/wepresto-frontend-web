@@ -133,15 +133,15 @@ export default function WithdrawalsTable({ data = [] }) {
         <Tbody>
           {getRows(data).map((item, index) => (
             <Tr key={index} bgColor="white">
-              <Td color="brand.font" borderLeftRadius={12}>
+              <Td color="brand.font" borderLeftRadius={12} textAlign="left">
                 {item.amount}
               </Td>
-              <Td color="brand.font">{item.depositAmount}</Td>
-              <Td color="brand.font">{item.comissionAmount}</Td>
-              <Td color="brand.font">{item.status}</Td>
-              <Td color="brand.font">{item.bank}</Td>
-              <Td color="brand.font">{item.accountType}</Td>
-              <Td color="brand.font">{item.accountNumber}</Td>
+              <Td color="brand.font" textAlign="left">{item.depositAmount}</Td>
+              <Td color="brand.font" textAlign="left">{item.comissionAmount}</Td>
+              <Td color="brand.font" textAlign="left">{item.status}</Td>
+              <Td color="brand.font" textAlign="left">{item.bank}</Td>
+              <Td color="brand.font" textAlign="left">{item.accountType}</Td>
+              <Td color="brand.font" textAlign="left">{item.accountNumber}</Td>
             </Tr>
           ))}
         </Tbody>

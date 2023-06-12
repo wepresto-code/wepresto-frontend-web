@@ -138,6 +138,23 @@ class LoanService {
 
     return loans;
   }
+
+  async getLoansNeedingFunding() {
+    const token = await getIdTokenFromCurrentUser();
+
+    const { data } = await axios.get(
+      `${environment.API_URL}/loans/needing-funding`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    const { loans } = data;
+
+    return loans;
+  }
 }
 
 export default new LoanService();

@@ -197,28 +197,28 @@ export default function InvestmentsPage() {
               <Tbody>
                 {participations.map((participation, index) => (
                   <Tr key={index} bgColor="white">
-                    <Td color="brand.font" borderLeftRadius={12}>
+                    <Td color="brand.font" borderLeftRadius={12} textAlign="left">
                       {participation.loan}
                     </Td>
-                    <Td color="brand.font" textAlign="center">
+                    <Td color="brand.font" textAlign="left">
                       {participation.invested}
                     </Td>
-                    <Td color="brand.font" textAlign="center">
+                    <Td color="brand.font" textAlign="left">
                       {participation.participationRate}
                     </Td>
-                    <Td color="brand.font" textAlign="center">
+                    <Td color="brand.font" textAlign="left">
                       {participation.annualInterestParticipationRate}
                     </Td>
-                    <Td color="brand.font" textAlign="center">
+                    <Td color="brand.font" textAlign="left">
                       {participation.term}
                     </Td>
-                    <Td color="brand.font" textAlign="center">
+                    <Td color="brand.font" textAlign="left">
                       {participation.paidPrincipal}
                     </Td>
-                    <Td color="brand.font" textAlign="center">
+                    <Td color="brand.font" textAlign="left">
                       {participation.paidInterest}
                     </Td>
-                    <Td color="brand.font" textAlign="center" borderRightRadius={12}>
+                    <Td color="brand.font" textAlign="left" borderRightRadius={12}>
                       {participation.interest}
                     </Td>
                   </Tr>
