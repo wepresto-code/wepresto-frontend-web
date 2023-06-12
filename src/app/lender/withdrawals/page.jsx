@@ -17,6 +17,7 @@ import getErrorMessage from "@wepresto/utils/get-error-message";
 
 import ValidateUser from "@wepresto/components/ValidateUser";
 import WithdrawalInformationCard from "./_components/WithdrawalInformationCard";
+import WithdrawalsTable from "./_components/WithdrawalsTable";
 
 export default function WithdrawalsPage() {
   const { user } = useAuthContext();
@@ -24,6 +25,7 @@ export default function WithdrawalsPage() {
 
   const [loading, setLoading] = useState(true);
   const [withdrawalInfo, setWithdrawalInfo] = useState();
+  const [withdrawals, setWithdrawals] = useState([]);
 
   const fetchWithdrawalInfo = async () => {
     try {
@@ -50,8 +52,29 @@ export default function WithdrawalsPage() {
     }
   };
 
+  const fetchWithdrawals = async () => {
+    try {
+      const result = await withdrawalService.getWithdrawals({
+        lenderUid: getLenderUid(user),
+      });
+
+      setWithdrawals(result);
+    } catch (error) {
+      toast({
+        position: "bottom-right",
+        title: "Hubo un error",
+        description: getErrorMessage(error),
+        status: "error",
+        duration: 10000,
+        isClosable: true,
+      });
+    }
+  };
+
   useEffect(() => {
-    fetchWithdrawalInfo().finally(() => setLoading(false));
+    Promise.all([fetchWithdrawalInfo(), fetchWithdrawals()]).finally(() =>
+      setLoading(false)
+    );
   }, []);
 
   return (
@@ -69,7 +92,18 @@ export default function WithdrawalsPage() {
 
         {loading && <Spinner mt={4} />}
 
-        {!loading && withdrawalInfo && <WithdrawalInformationCard data={withdrawalInfo} />}
+        {!loading && withdrawalInfo && (
+          <WithdrawalInformationCard data={withdrawalInfo} />
+        )}
+
+        {!loading && withdrawals.length > 0 === true && (
+          <>
+            <Heading key="1" as="h3" size="lg" fontWeight={800}>
+              Retiros
+            </Heading>
+            <WithdrawalsTable data={withdrawals} />
+          </>
+        )}
       </Flex>
     </>
   );

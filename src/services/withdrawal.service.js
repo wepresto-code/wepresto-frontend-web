@@ -65,6 +65,27 @@ class WithdrawalService {
       message: "Tu solicitud de retiro ha sido enviada."
     };
   }
+
+  async getWithdrawals({ lenderUid }) {
+    const token = await getIdTokenFromCurrentUser();
+
+    const { data } = await axios.get(
+      `${environment.API_URL}/withdrawals/lender-withdrawals`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          lenderUid,
+          take: 100,
+        },
+      }
+    );
+
+    const { withdrawals } = data;
+
+    return withdrawals;
+  }
 }
 
 export default new WithdrawalService();
