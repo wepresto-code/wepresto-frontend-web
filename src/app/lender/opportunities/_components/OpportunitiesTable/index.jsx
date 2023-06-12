@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Flex,
   Table,
@@ -10,10 +10,12 @@ import {
   Tbody,
   Td,
   Button,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 
 import formatCurrency from "@wepresto/utils/format-currency";
+import HowToInvestModal from "./_components/HowToInvestModal/inde";
 
 const getRows = (items) => {
   return items.map((item) => {
@@ -31,7 +33,17 @@ const getRows = (items) => {
 };
 
 export default function OpportunitiesTable({ data = [] }) {
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [loanUid, setLoanUid] = useState("");
+
+  const handleInvestmentButtonClick = ({ loanUid }) => {
+    setLoanUid(loanUid);
+    onOpen();
+  };
+  
   return (
+    <>
     <Flex overflowX="auto">
       <Table
         style={{ borderCollapse: "separate", borderSpacing: "0 12px" }}
@@ -131,8 +143,9 @@ export default function OpportunitiesTable({ data = [] }) {
                 <Button
                   colorScheme="primary"
                   maxW={"fit-content"}
+                  onClick={() => handleInvestmentButtonClick({ loanUid: item.uid })}
                 >
-                  Quiero invertir!
+                  Quiero participar!
                 </Button>
               </Td>
             </Tr>
@@ -140,5 +153,7 @@ export default function OpportunitiesTable({ data = [] }) {
         </Tbody>
       </Table>
     </Flex>
+    <HowToInvestModal isOpen={isOpen} onClose={onClose} loanUid={loanUid} />
+    </>
   );
 }
