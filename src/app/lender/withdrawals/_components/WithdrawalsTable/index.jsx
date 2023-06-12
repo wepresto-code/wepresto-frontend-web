@@ -67,7 +67,6 @@ export default function WithdrawalsTable({ data = [] }) {
                 color="primary.600"
                 cursor="help"
                 textAlign="right"
-                borderRadius={12}
               >
                 <Flex flexDir="row" alignItems="center">
                   Estado{" "}
@@ -85,7 +84,6 @@ export default function WithdrawalsTable({ data = [] }) {
                 color="primary.600"
                 cursor="help"
                 textAlign="right"
-                borderRadius={12}
               >
                 <Flex flexDir="row" alignItems="center">
                   Banco{" "}
@@ -103,7 +101,6 @@ export default function WithdrawalsTable({ data = [] }) {
                 color="primary.600"
                 cursor="help"
                 textAlign="right"
-                borderRadius={12}
               >
                 <Flex flexDir="row" alignItems="center">
                   Tipo de cuenta{" "}
@@ -121,7 +118,7 @@ export default function WithdrawalsTable({ data = [] }) {
                 color="primary.600"
                 cursor="help"
                 textAlign="right"
-                borderRadius={12}
+                borderRightRadius={12}
               >
                 <Flex flexDir="row" alignItems="center">
                   Número de cuenta{" "}
