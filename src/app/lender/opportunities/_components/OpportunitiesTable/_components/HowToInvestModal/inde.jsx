@@ -115,6 +115,22 @@ const Guide = ({ loanUid }) => {
             la información que Nequi nos reporta.
           </Text>
         }
+      />
+      <StepItem
+        step={4}
+        content={
+          <Text>
+            Si todo esta orden, tu inversión será confirmada y podrás verla en {" "}
+            <Link
+              fontWeight="medium"
+              color="primary.500"
+              target="_blank"
+              href={"/lender/investments"}
+            >
+              Inversiones
+            </Link>.
+          </Text>
+        }
         finalStep
       />
     </>
