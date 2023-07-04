@@ -76,13 +76,15 @@ export default function StepsForm({ type = undefined }) {
   const onSubmit = async (formData) => {
     try {
       if (type === "borrower") {
-        await userService.createBorrower(formData);
+        await userService.createBorrower({ ...formData });
       }
       if (type === "lender") {
-        await userService.createLender(formData);
+        await userService.createLender({ ...formData });
       }
-      await signIn(formData.email, formData.password);
-      await delay(5000);
+
+      await signIn({ email: formData.email, password: formData.password });
+
+      await delay(10000);
     } catch (error) {
       toast({
         position: "bottom-right",
