@@ -62,10 +62,9 @@ const Guide = ({ loanUid }) => {
         step={1}
         content={
           <Text>
-            Haz una transferencia/recarga a través de Nequi a este número de
-            celular:{" "}
+            Envia o recarga mediante Nequi a este número de celular:{" "}
             <Box as="strong" color="primary.500">
-              313 408 6868
+              3134086868
             </Box>
             <IconButton
               onClick={() => {
@@ -90,9 +89,8 @@ const Guide = ({ loanUid }) => {
         step={2}
         content={
           <Text>
-            Una vez que hayas realizado la transacción, envíanos una
-            captura de pantalla o comparte el comprobante al siguiente número de
-            WhatsApp:{" "}
+            Una vez que hayas realizado la transacción, envíanos una captura de
+            pantalla o comparte el comprobante al siguiente número de WhatsApp:{" "}
             <Link
               fontWeight="medium"
               color="primary.500"
@@ -111,8 +109,8 @@ const Guide = ({ loanUid }) => {
         step={3}
         content={
           <Text>
-            Al recibir tu comprobante, nosotros validaremos tu inversión con
-            la información que Nequi nos reporta.
+            Al recibir tu comprobante, nosotros validaremos tu inversión con la
+            información que Nequi nos reporta.
           </Text>
         }
       />
@@ -120,7 +118,7 @@ const Guide = ({ loanUid }) => {
         step={4}
         content={
           <Text>
-            Si todo esta orden, tu inversión será confirmada y podrás verla en {" "}
+            Si todo esta orden, tu inversión será confirmada y podrás verla en{" "}
             <Link
               fontWeight="medium"
               color="primary.500"
@@ -128,7 +126,8 @@ const Guide = ({ loanUid }) => {
               href={"/lender/investments"}
             >
               Inversiones
-            </Link>.
+            </Link>
+            .
           </Text>
         }
         finalStep
