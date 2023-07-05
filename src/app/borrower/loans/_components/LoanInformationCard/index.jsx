@@ -22,22 +22,22 @@ import formatDate from "@wepresto/utils/format-date";
 const loanState = {
   APPROVED: {
     name: "Aprobado",
-    bgColor: "primary.400",
+    bgColor: "status.approved",
     color: "primary.900",
   },
   REJECTED: {
     name: "Rechazado",
-    bgColor: "error.400",
+    bgColor: "status.rejected",
     color: "white",
   },
   DISBURSED: {
     name: "Desembolsado",
-    bgColor: "primary.700",
+    bgColor: "status.disbursed",
     color: "white",
   },
   APPLIED: {
     name: "Solicitado",
-    bgColor: "gray.700",
+    bgColor: "status.applied",
     color: "white",
   },
   REVIEWING: {
@@ -47,8 +47,13 @@ const loanState = {
   },
   PAID: {
     name: "Pagado",
-    bgColor: "primary.300",
+    bgColor: "status.paid",
     color: "primary.900",
+  },
+  FUNDING: {
+    name: "Fondeando",
+    bgColor: "status.funding",
+    color: "white",
   },
 };
 

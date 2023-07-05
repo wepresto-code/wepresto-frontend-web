@@ -19,7 +19,13 @@ const theme = extendTheme({
       background: "#F2F8F8",
     },
     status: {
-      reviewing: "#E47C50",
+      applied: "#FFC107",
+      reviewing: "#03A9F4",
+      funding: "#4CAF50",
+      approved: "#8BC34A",
+      rejected: "#F44336",
+      disbursed: "#9C27B0",
+      paid: "#009688",
     },
     primary: {
       50: "#ECF7F8",
