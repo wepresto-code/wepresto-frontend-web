@@ -5,11 +5,11 @@ import environment from "@wepresto/environment";
 import getIdTokenFromCurrentUser from "@wepresto/utils/get-id-token-from-current-user";
 
 class UserService {
-  async getOne({ uid }) {
+  async getOne({ authUid }) {
     const token = await getIdTokenFromCurrentUser();
 
     const { data } = await axios.get(
-      `${environment.API_URL}/users/${uid}`,
+      `${environment.API_URL}/users/${authUid}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -96,6 +96,25 @@ class UserService {
       ...data,
       message: "Se ha enviado un correo electrónico para restablecer tu contraseña",
     };
+  }
+
+  async changeFcmtoken({ authUid, fcmToken }) {
+    const token = await getIdTokenFromCurrentUser();
+
+    const { data } = await axios.patch(
+      `${environment.API_URL}/users/fcm-token`,
+      {
+        authUid,
+        fcmToken,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    return data;
   }
 }
 
