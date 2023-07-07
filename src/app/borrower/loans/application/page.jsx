@@ -436,14 +436,14 @@ export default function Application() {
                   py={2}
                 >
                   <Text color={"gray.400"}>Tasa Efectiva Anual:</Text>
-                  <Text>{simulatedLoan?.annualInterestRate || 0}%</Text>
+                  <Text>{(simulatedLoan?.annualInterestRate || 0) * 100}%</Text>
                 </Flex>
                 <Flex px={4} justifyContent={"space-between"} py={2}>
                   <Text color={"gray.400"}>Interés mensual:</Text>
                   <Text>
                     {approximateToTwoDecimals(
                       (simulatedLoan?.annualInterestRate || 0) / 12
-                    )}
+                    ) * 100}
                     %
                   </Text>
                 </Flex>
