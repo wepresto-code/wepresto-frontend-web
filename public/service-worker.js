@@ -14,6 +14,8 @@ const activateEvent = () => {
 };
 activateEvent();
 
+/*
+
 const cacheName = "v1";
 
 const cacheClone = async (e) => {
@@ -36,6 +38,8 @@ const fetchEvent = () => {
 };
 
 fetchEvent();
+
+*/
 
 self.addEventListener("push", (event) => {
   // console.log("Push message received: ", event);
