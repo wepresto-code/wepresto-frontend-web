@@ -13,14 +13,14 @@ import environment from "@wepresto/environment";
 
 import theme from "./theme";
 
-import messaging from "@wepresto/firebase/messaging-sw";
+// import messaging from "@wepresto/firebase/messaging-sw";
 
 import { AuthContextProvider } from "../context/auth-context";
 
 import setFcmToken from "@wepresto/utils/set-fcm-token";
 
 export function Providers({ children }) {
-  useEffect(() => {
+  useEffect(() => {    
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
         .register("/service-worker.js")
@@ -28,10 +28,13 @@ export function Providers({ children }) {
           // eslint-disable-next-line no-console
           console.log("scope is: ", registration.scope);
 
+          
           registration.pushManager.subscribe({
             userVisibleOnly: true,
             applicationServerKey: environment.FIREBASE_WEB_PUSH_KEY,
           });
+
+          const { default: messaging } = await import("@wepresto/firebase/messaging-sw");
 
           try {
             const currentToken = await getToken(messaging, {
