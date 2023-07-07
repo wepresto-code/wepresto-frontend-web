@@ -15,7 +15,9 @@ import {
 import { AiOutlineInfoCircle } from "react-icons/ai";
 
 import formatCurrency from "@wepresto/utils/format-currency";
-import HowToInvestModal from "./_components/HowToInvestModal/inde";
+import approximateToTwoDecimals from "@wepresto/utils/approximate-to-two-decimals";
+
+import HowToInvestModal from "./_components/HowToInvestModal";
 
 const getRows = (items) => {
   return items.map((item) => {
@@ -27,7 +29,7 @@ const getRows = (items) => {
       term: item?.term + " meses",
       fundedAmount: formatCurrency(item?.fundedAmount, "COP"),
       remainingAmount: formatCurrency(item?.remainingAmount, "COP"),
-      fundedPercentage: item?.fundedPercentage * 100 + "%",
+      fundedPercentage: approximateToTwoDecimals(item?.fundedPercentage * 100) + "%",
     };
   });
 };
