@@ -1,10 +1,12 @@
 import React from "react";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
+import { getToken } from "firebase/messaging";
+
+import environment from "@wepresto/environment";
 
 import userService from "@wepresto/services/user.service";
 
 import firebaseApp from "../firebase/config";
-import getFcmToken from "@wepresto/utils/get-fcm-token";
 
 const auth = getAuth(firebaseApp);
 
@@ -24,9 +26,40 @@ export const AuthContextProvider = ({ children }) => {
           .then(async (data) => {
             const mergedUser = { ...firebaseUser, ...data };
             setUser(mergedUser);
-            setLoading(false);
 
-            const fcmToken = await getFcmToken();
+            const registration = await navigator.serviceWorker.ready;
+
+            registration.pushManager.subscribe({
+              userVisibleOnly: true,
+              applicationServerKey: environment.FIREBASE_WEB_PUSH_KEY,
+            });
+
+            const { default: messaging } = await import("@wepresto/firebase/messaging-sw");
+
+            let fcmToken;
+
+            try {
+              const currentToken = await getToken(messaging, {
+                vapidKey: environment.FIREBASE_WEB_PUSH_KEY,
+                serviceWorkerRegistration: registration,
+              });
+  
+              if (!currentToken) {
+                // eslint-disable-next-line no-console
+                console.log(
+                  "no registration token available. Request permission to generate one."
+                );
+                return;
+              }
+
+              fcmToken = currentToken;
+            } catch (error) {
+              // eslint-disable-next-line no-console
+              console.log("an error occurred while retrieving token. ", error);
+            }
+
+            // eslint-disable-next-line no-console
+            console.log("fcm token: ", fcmToken);
 
             // check if the fcm token is set
             if (fcmToken && fcmToken !== mergedUser.fcmToken) {
@@ -43,6 +76,8 @@ export const AuthContextProvider = ({ children }) => {
                 console.error(error);
               }
             }
+
+            setLoading(false);
           })
           .catch((error) => {
             // eslint-disable-next-line no-console

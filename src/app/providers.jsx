@@ -7,17 +7,10 @@ import "@fontsource/poppins/600.css";
 import React, { useEffect } from "react";
 import { CacheProvider } from "@chakra-ui/next-js";
 import { ChakraProvider } from "@chakra-ui/react";
-import { getToken } from "firebase/messaging";
-
-import environment from "@wepresto/environment";
 
 import theme from "./theme";
 
-// import messaging from "@wepresto/firebase/messaging-sw";
-
 import { AuthContextProvider } from "../context/auth-context";
-
-import setFcmToken from "@wepresto/utils/set-fcm-token";
 
 export function Providers({ children }) {
   useEffect(() => {    
@@ -27,35 +20,6 @@ export function Providers({ children }) {
         .then(async (registration) => {
           // eslint-disable-next-line no-console
           console.log("scope is: ", registration.scope);
-
-          
-          registration.pushManager.subscribe({
-            userVisibleOnly: true,
-            applicationServerKey: environment.FIREBASE_WEB_PUSH_KEY,
-          });
-
-          const { default: messaging } = await import("@wepresto/firebase/messaging-sw");
-
-          try {
-            const currentToken = await getToken(messaging, {
-              vapidKey: environment.FIREBASE_WEB_PUSH_KEY,
-              serviceWorkerRegistration: registration,
-            });
-
-            if (!currentToken) {
-              // eslint-disable-next-line no-console
-              console.log(
-                "no registration token available. Request permission to generate one."
-              );
-              return;
-            }
-
-            // set token in local storage
-            await setFcmToken(currentToken);
-          } catch (error) {
-            // eslint-disable-next-line no-console
-            console.log("an error occurred while retrieving token. ", error);
-          }
         });
     }
   }, []);
