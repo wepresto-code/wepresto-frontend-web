@@ -1,11 +1,10 @@
 import React from "react";
-import {
-  onAuthStateChanged,
-  getAuth,
-} from "firebase/auth";
+import { onAuthStateChanged, getAuth } from "firebase/auth";
+
 import userService from "@wepresto/services/user.service";
 
 import firebaseApp from "../firebase/config";
+import getFcmToken from "@wepresto/utils/get-fcm-token";
 
 const auth = getAuth(firebaseApp);
 
@@ -20,11 +19,36 @@ export const AuthContextProvider = ({ children }) => {
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
-        userService.getOne({ uid: firebaseUser.uid }).then((data) => {
-          const mergedUser = { ...firebaseUser, ...data };
-          setUser(mergedUser);
-          setLoading(false);
-        });
+        userService
+          .getOne({ authUid: firebaseUser.uid })
+          .then(async (data) => {
+            const mergedUser = { ...firebaseUser, ...data };
+            setUser(mergedUser);
+            setLoading(false);
+
+            const fcmToken = await getFcmToken();
+
+            // check if the fcm token is set
+            if (fcmToken && fcmToken !== mergedUser.fcmToken) {
+              // check if the fcm token is the same as the one in the api
+              // if not, update the fcm token in the api
+              try {
+                await userService.changeFcmtoken({
+                  authUid: firebaseUser.uid,
+                  fcmToken,
+                });
+              } catch (error) {
+                // eslint-disable-next-line no-console
+                console.log("error changing fcm token...");
+                console.error(error);
+              }
+            }
+          })
+          .catch((error) => {
+            // eslint-disable-next-line no-console
+            console.log("error getting user...");
+            console.error(error);
+          });
       } else {
         setUser(undefined);
         setLoading(false);
