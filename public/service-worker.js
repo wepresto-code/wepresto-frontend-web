@@ -14,6 +14,7 @@ const activateEvent = () => {
 };
 activateEvent();
 
+// update this value every time you release a new version of your PWA (major/minor changes)
 const cacheName = "v2";
 
 const cacheClone = async (e) => {
